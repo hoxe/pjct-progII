@@ -11,6 +11,7 @@ import {
 import React, { useContext } from 'react'
 
 import { AuthContext } from './authConext'
+import PrivateRoute from './privateRoute';
 
 
 export default function Routers() {
@@ -22,16 +23,14 @@ export default function Routers() {
   return (
     <BrowserRouter>
       <Routes>
-        {
-          isLogged ? (
-            <Route path='home' element={<Home />} />
-          ) : (
-            <>
-              <Route path="cadastro" element={<Cadastro />} />
-              <Route path='login' element={<Login />} />
-            </>
-          )
-        }
+              
+         <Route element={<PrivateRoute islogged={isLogged} />}>
+          <Route path='home' element={<Home />}/>
+          </Route>
+
+         <Route path="cadastro" element={<Cadastro />} />
+         <Route path='login' element={<Login />} />
+    
       </Routes>
     </BrowserRouter>
   )
